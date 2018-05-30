@@ -18,10 +18,8 @@
 # Start from a Java image.
 FROM java:8
 
-ARG version
-
 # Rocketmq version
-ENV ROCKETMQ_VERSION ${version}
+ENV ROCKETMQ_VERSION 4.2.0
 
 # Rocketmq home
 ENV ROCKETMQ_HOME  /opt/rocketmq-${ROCKETMQ_VERSION}
@@ -34,10 +32,8 @@ RUN mkdir -p \
 		/opt/logs \
 	    /opt/store
 
-RUN curl https://dist.apache.org/repos/dist/release/rocketmq/${ROCKETMQ_VERSION}/rocketmq-all-${ROCKETMQ_VERSION}-bin-release.zip -o rocketmq.zip \
-          && unzip rocketmq.zip \
-          && mv rocketmq-all*/* . \
-          && rmdir rocketmq-all*  \
+ADD rocketmq-all-4.2.0-bin-release.zip rocketmq.zip
+RUN       unzip rocketmq.zip \
           && rm rocketmq.zip
 
 

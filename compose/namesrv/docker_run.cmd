@@ -1,1 +1,1 @@
-docker run -d -p 9876:9876 --name rmqnamesrv  apache/incubator-rocketmq-namesrv:4.1.0-incubating
+docker run -d -p 9876:9876 --name rmqnamesrv  going/rocketmq-namesrv:4.2.0

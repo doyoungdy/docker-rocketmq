@@ -1,25 +1,19 @@
 version: '2'
 services:
   namesrv:
-    build:
-      context: ./namesrv
-      args:
-        - version=4.1.0-incubating
+    image: going/rocketmq-namesrv:4.2.0
     ports:
       - 9876:9876
     volumes:
-      - ./namesrv/logs:/opt/logs
-      - ./namesrv/store:/opt/store
+      - "E:/rocketmq/namesrv/master/logs:/opt/logs"
+      - "E:/rocketmq/namesrv/master/store:/opt/store"
   broker:
-    build:
-      context: ./broker
-      args:
-        - version=4.1.0-incubating
+    image: going/rocketmq-broker:4.2.0
     ports:
       - 10909:10909
       - 10911:10911
     volumes:
-      - ./broker/logs:/opt/logs
-      - ./broker/store:/opt/store
-    depends_on:
-      - namesrv
+      - "E:/rocketmq/broker/master-1/logs:/opt/logs"
+      - "E:/rocketmq/broker/master-1/store:/opt/store"
+    links:
+      - namesrv:namesrv
