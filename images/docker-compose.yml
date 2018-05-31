@@ -17,3 +17,19 @@ services:
       - "E:/rocketmq/broker/master-1/store:/opt/store"
     links:
       - namesrv:namesrv
+  console:
+    image: styletang/rocketmq-console-ng:latest
+    ports:
+     - "8080:8080"
+    links:
+     - namesrv:namesrv
+    environment:
+     JAVA_OPTS: -Drocketmq.config.namesrvAddr=namesrv:9876 #-Dcom.rocketmq.sendMessageWithVIPChannel=false
+  producer:
+    image: going/rocketmq-producer:4.1.0
+    links:
+     - namesrv:namesrv
+  consumer:
+    image: going/rocketmq-consumer:4.1.0
+    links:
+     - namesrv:namesrv     
